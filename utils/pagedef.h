@@ -43,6 +43,11 @@
  */
 #define MAX_TB_NUM 31
 #define RELEASE 1
+
+#define STRING 0
+#define INT 1
+#define DOUBLE 2
+
 typedef unsigned int* BufType;
 typedef unsigned int uint;
 typedef unsigned short ushort;
