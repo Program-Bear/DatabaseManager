@@ -52,6 +52,63 @@
  * bool load(void* source_address)
  * 使用从source_address位置开始的内存空间来构造当前记录
 */
+struct Book{
+    char* title;
+    char* author;
+    char* publisher;
+    int copies;
+    public Book(char* _t, char* _a, char* _p, int _c){
+        title = _t;
+        author = _a;
+        pulisher = _p;
+        copies = _c;
+    }
+};
+
+struct Customer{
+    char* name;
+    char* gender;
+    public Customer(char* n, char* g){
+        name = n;
+        gender = g;
+    }
+};
+
+struct Website{
+    char* name;
+    char* url;
+    public Website(char* n, char* u){
+        name = n;
+        url = u;
+    }
+};
+
+struct Price{
+    int web_id;
+    int book_id;
+    double price;
+    public Price(int a, int b, int p){
+        web_id = a;
+        book_id = b;
+        price = p;
+    }
+};
+
+struct Orders{
+    int web_id;
+    int cus_id;
+    int bok_id;
+    char* data;
+    int quantity;
+    public Orders(int a, int b, int c, int d, char* f){
+        web_id = a;
+        cus_id = b;
+        bok_id = c;
+        data = f;
+        quantity = d;
+    }
+};
+
 class Record{
 	int state;
 	int primary_index;
@@ -99,37 +156,50 @@ class Record{
 
 	public:
     	Record(int _is, int _cs, int* len,  int _pi = 0, bool is_pri_int = true){//初始化一条空记录
-		init(_is,_cs,len,_pi,is_pro_int);
-	}
+            init(_is,_cs,len,_pi,is_pro_int);
+        }
+    
     
     	Record(void* source_address);
-	int get_state(){return state;}
-	int get_primary_index(){return primary_index;}
-	int get_int_attribute(int index){
-		if (index > int_size) return WRONG_INT;
-		return int_array[index];
-	}
-	char* get_char_attribute(int index){
-		if (index > char_size) return (char)WRONG_CHAR;
-		return char_array[index];
-	}
+    
+        Record(Book* book);
+    
+        Record(Customer* customer);
+    
+        Record(Website* website);
+    
+        Record(Orders* orders);
+    
+        Record(Price* price);
+    
+        int get_state(){return state;}
+        int get_primary_index(){return primary_index;}
+        int get_int_attribute(int index){
+            if (index > int_size) return WRONG_INT;
+            return int_array[index];
+        }
+        char* get_char_attribute(int index){
+            if (index > char_size) return (char)WRONG_CHAR;
+            return char_array[index];
+        }
     	int get_attribute_length(int index){
         	if (index > char_size) return WRONG_INT;
-		return char_length[index];
+            return char_length[index];
     	}
     	char get_char(int index, int pos){
         	return char_array[index][pos];
     	}
 	
-	int get_total_size();
+    
+        int get_total_size();
 
-	int get_attribute_type(int index);
+        int get_attribute_type(int index);
 
-	bool save(void* target_address);
+        bool save(void* target_address);
 	
-	bool load(void* source_address);
+        bool load(void* source_address);
 
-
+        void output();
 
     //bool load(void* start_address, int record_size);
     //bool save(void* target_address);
