@@ -47,7 +47,7 @@ int main() {
 		//在重新调用allocPage获取另一个页的数据时并没有将原先b指向的内存释放掉
 		//因为内存管理都在BufPageManager中做好了
 		b = bpm->allocPage(f2, pageID, index, false);
-		b[0] = pageID;
+        b[0] = pageID;
 		b[1] = f2;
 		bpm->markDirty(index);
 	}
