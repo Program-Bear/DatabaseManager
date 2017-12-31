@@ -66,6 +66,13 @@ FLOAT           ("FLOAT"|"float")
 FOREIGN         ("FOREIGN"|"foreign")
 REFERENCES      ("REFERENCES"|"references")
 
+LIKE            ("LIKE"|"like")
+
+SUM             ("SUM"|"sum")
+AVG             ("AVG"|"avg")
+MAX             ("MAX"|"max")
+MIN             ("MIN"|"min")
+
 
 %x SS
 %x S
@@ -124,6 +131,13 @@ REFERENCES      ("REFERENCES"|"references")
 {GTE}           { return SemValue::keyword(GTE);        }
 {NEQ}           { return SemValue::keyword(NEQ);        }
 
+{LIKE}          { return SemValue::keyword(LIKE);       }
+
+{SUM}           { return SemValue::keyword(SUM);        }
+{AVG}           { return SemValue::keyword(AVG);        }
+{MAX}           { return SemValue::keyword(MAX);        }
+{MIN}           { return SemValue::keyword(MIN);        }
+
 
 {IDENTIFIER}    {
                     yylval = SemValue();
@@ -144,7 +158,7 @@ REFERENCES      ("REFERENCES"|"references")
                     yylval.code = VALUE_STRING;
                     yylval.literal = std::string(yytext);
                     return VALUE_STRING;
-                }  
+                }             
 
 <INITIAL>\"     {
                     str = std::string();

@@ -11,7 +11,7 @@ using namespace std;
 class Condition
 {
 public: 
-	enum CondType { COL_EXPR_TYPE, COL_IS_NULL_TYPE, COL_IS_NOT_NULL_TYPE};
+	enum CondType { COL_EXPR_TYPE, COL_LIKE_VALUE_TYPE, COL_IS_NULL_TYPE, COL_IS_NOT_NULL_TYPE };
 	
 	Condition() {}
     Condition(CondType ct) : condType(ct) {}
@@ -21,6 +21,7 @@ public:
 	Attr col;
 	string optr;
 	Expr expr;
+	Value value;
 };
 
 #endif

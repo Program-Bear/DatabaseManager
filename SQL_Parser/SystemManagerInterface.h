@@ -1,6 +1,9 @@
-#ifndef BSYSTEM_MANAGER_INTERFACE_H
+#ifndef SYSTEM_MANAGER_INTERFACE_H
 #define SYSTEM_MANAGER_INTERFACE_H
 
+#include <map>
+
+#include "Database.h"
 #include "SemValue.h"
 
 using namespace std;
@@ -9,7 +12,7 @@ class SystemManagerInterface
 {
 public:
     // Constructor
-    SystemManagerInterface() {}
+    SystemManagerInterface() { haveCurrentDatabase = false; }
 
 
     // SysStmt
@@ -35,6 +38,11 @@ public:
 	// IdxStmt
     virtual void createIndex(string tbName, string colName);
     virtual void dropIndex(string tbName, string colName);
+
+private:
+    bool haveCurrentDatabase;
+    string currentDatabaseName;
+    map<string, Database> databases;
 };
 
 #endif  // SYSTEM_MANAGER_INTERFACE_H
