@@ -1,7 +1,7 @@
 #ifndef _SEM_VALUE_H
 #define _SEM_VALUE_H
 
-#include <list>
+#include <vector>
 #include <string>
 #include "Set.h"
 #include "Expr.h"
@@ -11,7 +11,7 @@
 #include "SchemaEntry.h"
 
 using std::string;
-using std::list;
+using std::vector;
 
 class SemValue
 {
@@ -25,31 +25,34 @@ public:
     // VALUE_STRING String
 	string literal;
     
+    // VALUE_FLOAT float
+    double float_value;
+    
     // Type (eg: INT(VALUE_INT), VARCHAR(VALUE_INT))
     string dataType;
     
     // FieldList & Field
-    list<SchemaEntry> schemaList;
+    vector<SchemaEntry> schemaList;
     SchemaEntry schemaEntry;
 	
 	// ValueLists & ValueList & Value
-	list< list<Value> > valuesList;
-	list<Value> values;
+	vector< vector<Value> > valuesList;
+	vector<Value> values;
 	Value value;
 	
 	// ColumnList 
-	list<string> columnList;
+	vector<string> columnList;
 	
 	// TableList
-	list<string> tableList;
+	vector<string> tableList;
 	
 	// SetClause
 	Set set;
-	list<Set> setList;
+	vector<Set> setList;
 	
 	// Selector
 	Selector selector;
-	list<Selector> selectorList;
+	vector<Selector> selectorList;
 	
 	// Col : [TbName .] ColName
 	Attr col;
@@ -64,7 +67,7 @@ public:
     int code;
     
     // WhereClauseList & WhereClause
-    list<Condition> condList;
+    vector<Condition> condList;
     Condition cond;
 	
 	// For Generating Keywords

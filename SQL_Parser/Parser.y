@@ -7,6 +7,8 @@
     #include "SystemManagerInterface.cpp"
     #define YYSTYPE SemValue
     using namespace std;
+    
+    extern FILE * yyin;    
 
     extern "C"
     {
@@ -35,7 +37,9 @@
 %token NEQ          LTE           GTE
 %token IDENTIFIER
 %token VALUE_INT
+%token VALUE_DATE
 %token VALUE_STRING
+%token VALUE_FLOAT
 %token LITERAL
 
 %token LIKE
@@ -222,15 +226,23 @@ ValueList           :   Value
 
 Value               :   VALUE_INT
                         {
-                            $$.value = Value(Value::VALUE_INT_TYPE, $1.length, "");
+                            $$.value = Value(Value::VALUE_INT_TYPE, $1.length, "", 0);
                         }
                     |   VALUE_STRING
                         {
-                            $$.value = Value(Value::VALUE_STRING_TYPE, $0.length, $1.literal);
+                            $$.value = Value(Value::VALUE_STRING_TYPE, 0, $1.literal, 0);
+                        }
+                    |   VALUE_DATE
+                        {
+                            $$.value = Value(Value::VALUE_DATE_TYPE, 0, $1.literal, 0);
+                        }
+                    |   VALUE_FLOAT
+                        {
+                            $$.value = Value(Value::VALUE_FLOAT_TYPE, 0, "", $1.float_value);
                         }
                     |   NULLL
                         {
-                            $$.value = Value(Value::VALUE_NULL_TYPE, 0, "");
+                            $$.value = Value(Value::VALUE_NULL_TYPE, 0, "", 0);
                         }
                     ;                                                
 
@@ -419,10 +431,12 @@ void yyerror(const char *s)
     cout << "yyerror: " << s << endl;
 }
 
-
 int main()
 {
+    //FILE * f1 = fopen("SQL_TEST.txt", "r");
+    //yyin = f1;
     yyparse();
+    //fclose(f1);
     return 0;
 }
 

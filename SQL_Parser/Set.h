@@ -1,7 +1,6 @@
 #ifndef HX_SET_H
 #define HX_SET_H
 
-#include <list>
 #include <string>
 #include "Value.h"
 using namespace std;

@@ -1,49 +1,108 @@
-#ifndef YYSTYPE
-#define YYSTYPE int
+/* A Bison parser, made by GNU Bison 3.0.4.  */
+
+/* Bison interface for Yacc-like parsers in C
+
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+
+/* As a special exception, you may create a larger work that contains
+   part or all of the Bison parser skeleton and distribute that work
+   under terms of your choice, so long as that work isn't itself a
+   parser generator using the skeleton or a modified version thereof
+   as a parser skeleton.  Alternatively, if you modify or redistribute
+   the parser skeleton itself, you may (at your option) remove this
+   special exception, which will cause the skeleton and the resulting
+   Bison output files to be licensed under the GNU General Public
+   License without this special exception.
+
+   This special exception was added by the Free Software Foundation in
+   version 2.2 of Bison.  */
+
+#ifndef YY_YY_PARSER_TAB_H_INCLUDED
+# define YY_YY_PARSER_TAB_H_INCLUDED
+/* Debug traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
 #endif
-#define	DATABASE	257
-#define	DATABASES	258
-#define	TABLE	259
-#define	TABLES	260
-#define	SHOW	261
-#define	CREATE	262
-#define	DROP	263
-#define	USE	264
-#define	PRIMARY	265
-#define	KEY	266
-#define	NOT	267
-#define	NULLL	268
-#define	INSERT	269
-#define	INTO	270
-#define	VALUES	271
-#define	DELETE	272
-#define	FROM	273
-#define	WHERE	274
-#define	UPDATE	275
-#define	SET	276
-#define	SELECT	277
-#define	IS	278
-#define	INT	279
-#define	VARCHAR	280
-#define	DESC	281
-#define	INDEX	282
-#define	AND	283
-#define	DATE	284
-#define	FLOAT	285
-#define	FOREIGN	286
-#define	REFERENCES	287
-#define	NEQ	288
-#define	LTE	289
-#define	GTE	290
-#define	IDENTIFIER	291
-#define	VALUE_INT	292
-#define	VALUE_STRING	293
-#define	LITERAL	294
-#define	LIKE	295
-#define	SUM	296
-#define	AVG	297
-#define	MAX	298
-#define	MIN	299
+#if YYDEBUG
+extern int yydebug;
+#endif
+
+/* Token type.  */
+#ifndef YYTOKENTYPE
+# define YYTOKENTYPE
+  enum yytokentype
+  {
+    DATABASE = 258,
+    DATABASES = 259,
+    TABLE = 260,
+    TABLES = 261,
+    SHOW = 262,
+    CREATE = 263,
+    DROP = 264,
+    USE = 265,
+    PRIMARY = 266,
+    KEY = 267,
+    NOT = 268,
+    NULLL = 269,
+    INSERT = 270,
+    INTO = 271,
+    VALUES = 272,
+    DELETE = 273,
+    FROM = 274,
+    WHERE = 275,
+    UPDATE = 276,
+    SET = 277,
+    SELECT = 278,
+    IS = 279,
+    INT = 280,
+    VARCHAR = 281,
+    DESC = 282,
+    INDEX = 283,
+    AND = 284,
+    DATE = 285,
+    FLOAT = 286,
+    FOREIGN = 287,
+    REFERENCES = 288,
+    NEQ = 289,
+    LTE = 290,
+    GTE = 291,
+    IDENTIFIER = 292,
+    VALUE_INT = 293,
+    VALUE_DATE = 294,
+    VALUE_STRING = 295,
+    VALUE_FLOAT = 296,
+    LITERAL = 297,
+    LIKE = 298,
+    SUM = 299,
+    AVG = 300,
+    MAX = 301,
+    MIN = 302
+  };
+#endif
+
+/* Value type.  */
+#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+typedef int YYSTYPE;
+# define YYSTYPE_IS_TRIVIAL 1
+# define YYSTYPE_IS_DECLARED 1
+#endif
 
 
 extern YYSTYPE yylval;
+
+int yyparse (void);
+
+#endif /* !YY_YY_PARSER_TAB_H_INCLUDED  */

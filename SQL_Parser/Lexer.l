@@ -12,8 +12,6 @@
         int yylex(void);
         
         int yywrap();
-
-        //int yyparse(void);
     }
 
     std::string str;
@@ -25,7 +23,9 @@ DIGIT           ([0-9])
 
 IDENTIFIER      ([A-Za-z][_0-9A-Za-z]*)
 VALUE_INT       ({DIGIT}+)
-VALUE_STRING    ('[^']*')
+VALUE_DATE      ('{DIGIT}{4}-[0-1]{DIGIT}-[0-3]{DIGIT}')
+VALUE_STRING    ('(\\.|[^'\\])*')
+VALUE_FLOAT     ({VALUE_INT}\.{VALUE_INT})
 
 OPERATOR        (","|"."|"*"|"("|")"|"="|"<"|">"|";")
 WHITESPACE	    ([ \t]+)
@@ -61,7 +61,7 @@ VARCHAR         ("VARCHAR"|"varchar")
 DESC            ("DESC"|"desc")
 INDEX           ("INDEX"|"index")
 AND             ("AND"|"and")
-DATE            ("DATE"|"date")
+DATE            ("DATE")
 FLOAT           ("FLOAT"|"float")
 FOREIGN         ("FOREIGN"|"foreign")
 REFERENCES      ("REFERENCES"|"references")
@@ -153,11 +153,27 @@ MIN             ("MIN"|"min")
                     return VALUE_INT;
                 }
 
+{VALUE_DATE}    {
+                    yylval = SemValue();
+                    yylval.code = VALUE_DATE;
+                    std::string datestr = std::string(yytext);
+                    yylval.literal = datestr.substr(1, datestr.length() - 2);
+                    return VALUE_DATE;
+                }
+
 {VALUE_STRING}  {
                     yylval = SemValue();
                     yylval.code = VALUE_STRING;
-                    yylval.literal = std::string(yytext);
+                    std::string str = std::string(yytext);
+                    yylval.literal = str.substr(1, str.length() - 2);    
                     return VALUE_STRING;
+                }
+
+{VALUE_FLOAT}   {
+                    yylval = SemValue();
+                    yylval.code = VALUE_FLOAT;
+                    sscanf(yytext, "%lf", &yylval.float_value);
+                    return VALUE_FLOAT;
                 }             
 
 <INITIAL>\"     {

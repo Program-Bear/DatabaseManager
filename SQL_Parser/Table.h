@@ -17,6 +17,7 @@ public:
     Table(string _tbName) : tbName(_tbName) {}
 
     string tbName;
+    vector<Column> columnVector;
     map<string, Column> columns;
 };
 
